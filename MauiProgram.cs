@@ -31,13 +31,16 @@ public static class MauiProgram
 
         //Add Pages/Views
         s.AddSingleton<TodoListPage>();
+        s.AddSingleton<TodoItemPage>();
 
         //Add ViewModels
         s.AddSingleton<TodoListViewModel>();
+        s.AddSingleton<TodoItemViewModel>();
 
         //Add Services
         s.AddSingleton<TodoDatabase>();
         s.AddSingleton<ITodoListRepository, TodoListRepository>();
+        s.AddSingleton<ITodoItemRepository, TodoItemRepository>();
 
         return builder;
     }

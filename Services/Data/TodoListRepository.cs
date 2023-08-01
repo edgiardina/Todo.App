@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Todo.Models;
+﻿using Todo.Models;
 
 namespace Todo.Services.Data
 {
@@ -27,6 +22,22 @@ namespace Todo.Services.Data
                                              .ToListAsync();
         }
 
+        /// <summary>
+        /// Returns single Todo List by its Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public async Task<TodoList> GetTodoListByIdAsync(int id)
+        {
+            return await todoDatabase.Catalog.Table<TodoList>()
+                                 .FirstOrDefaultAsync(n => n.Id == id);                             
+        }
+
+        /// <summary>
+        /// Creates a Todo list with a specific title
+        /// </summary>
+        /// <param name="todoListTitle"></param>
+        /// <returns></returns>
         public async Task CreateTodoListAsync(string todoListTitle)
         {
             var todoList = new TodoList
@@ -40,6 +51,11 @@ namespace Todo.Services.Data
             await todoDatabase.Catalog.InsertAsync(todoList);
         }
 
+        /// <summary>
+        /// Delete a Todo list by its Id
+        /// </summary>
+        /// <param name="todoListId"></param>
+        /// <returns></returns>
         public async Task DeleteTodoListAsync(int todoListId)
         {
             var todoList = await todoDatabase.Catalog.Table<TodoList>().FirstAsync(n => n.Id == todoListId);

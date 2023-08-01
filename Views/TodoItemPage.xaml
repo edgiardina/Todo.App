@@ -1,19 +1,19 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Todo.Views.TodoListPage"           
-             xmlns:fluent="clr-namespace:MauiIcons.Fluent;assembly=MauiIcons.Fluent"
+             xmlns:fluent="clr-namespace:MauiIcons.Fluent;assembly=MauiIcons.Fluent"             
              xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
              xmlns:android="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.AndroidSpecific;assembly=Microsoft.Maui.Controls"
-             Title="Todo Lists">
+             x:Class="Todo.Views.TodoItemPage"
+             Title="{Binding ListTitle}">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Add Todo List" x:Name="AddButton" Clicked="AddButton_Clicked" IconImageSource="{fluent:Icon Icon=Add28}" />
+        <ToolbarItem Text="Add Todo Item" x:Name="AddButton" Clicked="AddButton_Clicked"  IconImageSource="{fluent:Icon Icon=Add28}" />
     </ContentPage.ToolbarItems>
 
-    <CollectionView x:Name="TodoLists" x:FieldModifier="public" SelectionMode="Single" ItemsSource="{Binding TodoLists}" SelectionChanged="TodoLists_SelectionChanged">
+    <CollectionView x:Name="TodoLists" x:FieldModifier="public" SelectionMode="Single" ItemsSource="{Binding TodoItems}">
         <CollectionView.EmptyView>
             <ContentView>
-                <Label Text="You have no Todo lists at the moment. Use the Add icon in the top right to create a Todo list."
+                <Label Text="You have no Todo items for this list at the moment. Use the Add icon in the top right to create a Todo list."
                        Padding="10" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
             </ContentView>
         </CollectionView.EmptyView>

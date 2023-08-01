@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using Todo.Models;
 using Todo.ViewModels;
 
 namespace Todo.Views
@@ -40,6 +41,16 @@ namespace Todo.Views
             if (foundListItemId)
             {
                 await _todoListViewModel.DeleteTodoList(swipedToDoListItemId);
+            }
+        }
+
+        private async void TodoLists_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var selectedItem = (TodoList)e.CurrentSelection.FirstOrDefault();
+
+            if (selectedItem != null)
+            {
+                await Shell.Current.GoToAsync($"TodoItem?todoListId={selectedItem.Id}");
             }
         }
     }

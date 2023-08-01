@@ -5,16 +5,16 @@ using Todo.Services.Data;
 
 namespace Todo.ViewModels
 {
-    public class TodoListViewModel
+    public class TodoListViewModel : BaseViewModel
     {
         public ObservableCollection<TodoList> TodoLists { get; set; } = new ObservableCollection<TodoList>();
 
-        private readonly ITodoListRepository _todoRepository;
+        private readonly ITodoListRepository _todoListRepository;
         private readonly ILogger _logger;
 
-        public TodoListViewModel(ITodoListRepository todoRepository, ILogger<TodoListViewModel> logger)
+        public TodoListViewModel(ITodoListRepository todoListRepository, ILogger<TodoListViewModel> logger)
         {
-            _todoRepository = todoRepository;
+            _todoListRepository = todoListRepository;
             _logger = logger;
         }
 
@@ -22,7 +22,7 @@ namespace Todo.ViewModels
         {
             try
             {
-                var todoLists = await _todoRepository.GetTodoListsAsync();
+                var todoLists = await _todoListRepository.GetTodoListsAsync();
                 TodoLists.Clear();
                 foreach (var todoList in todoLists)
                 {
@@ -39,7 +39,7 @@ namespace Todo.ViewModels
         {
             try
             {
-                await _todoRepository.CreateTodoListAsync(titleOfTodoList);
+                await _todoListRepository.CreateTodoListAsync(titleOfTodoList);
                 await this.LoadTodoLists();
                 _logger.LogDebug("User Added TodoList item", titleOfTodoList);
             }
@@ -53,7 +53,7 @@ namespace Todo.ViewModels
         {
             try
             {
-                await _todoRepository.DeleteTodoListAsync(todoListId);
+                await _todoListRepository.DeleteTodoListAsync(todoListId);
                 await this.LoadTodoLists();
                 _logger.LogDebug("User Deleted TodoList item", todoListId);
             }

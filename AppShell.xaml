@@ -10,6 +10,6 @@
     <ShellContent
         Title="Home"
         ContentTemplate="{DataTemplate views:TodoListPage}"
-        Route="MainPage" />
+        Route="TodoList" />
 
 </Shell>

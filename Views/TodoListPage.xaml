@@ -25,14 +25,19 @@
                             <SwipeItem Text="Delete"                                           
                                    IconImageSource="{fluent:Icon Icon=Delete24, IconColor=White}"
                                    BackgroundColor="{StaticResource DeleteBackgroundColor}"
-                                   Invoked="SwipeItem_Invoked"
+                                   Invoked="DeleteItem_Invoked"
+                                   CommandParameter="{Binding Id}"/>
+                            <SwipeItem Text="Edit"                                           
+                                   IconImageSource="{fluent:Icon Icon=Edit32, IconColor=White}"
+                                   BackgroundColor="{StaticResource Yellow100Accent}"
+                                   Invoked="EditItem_Invoked"
                                    CommandParameter="{Binding Id}"/>
                         </SwipeItems>
                     </SwipeView.RightItems>
-                    <StackLayout>
+                    <VerticalStackLayout>
                         <Label Grid.Column="1" Text="{Binding Title}" VerticalTextAlignment="Center" FontSize="18" Margin="10" />
                         <BoxView Style="{StaticResource BoxSeperator}"/>
-                    </StackLayout>
+                    </VerticalStackLayout>
                 </SwipeView>
             </DataTemplate>
         </CollectionView.ItemTemplate>

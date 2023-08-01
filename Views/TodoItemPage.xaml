@@ -10,7 +10,7 @@
         <ToolbarItem Text="Add Todo Item" x:Name="AddButton" Clicked="AddButton_Clicked"  IconImageSource="{fluent:Icon Icon=Add28}" />
     </ContentPage.ToolbarItems>
 
-    <CollectionView x:Name="TodoLists" x:FieldModifier="public" SelectionMode="Single" ItemsSource="{Binding TodoItems}">
+    <CollectionView x:Name="TodoLists" x:FieldModifier="public" SelectionMode="None" ItemsSource="{Binding TodoItems}">
         <CollectionView.EmptyView>
             <ContentView>
                 <Label Text="You have no Todo items for this list at the moment. Use the Add icon in the top right to create a Todo list."
@@ -25,14 +25,22 @@
                             <SwipeItem Text="Delete"                                           
                                    IconImageSource="{fluent:Icon Icon=Delete24, IconColor=White}"
                                    BackgroundColor="{StaticResource DeleteBackgroundColor}"
-                                   Invoked="SwipeItem_Invoked"
+                                   Invoked="DeleteItem_Invoked"
+                                   CommandParameter="{Binding Id}"/>
+                            <SwipeItem Text="Edit"                                           
+                                   IconImageSource="{fluent:Icon Icon=Edit32, IconColor=White}"
+                                   BackgroundColor="{StaticResource Yellow100Accent}"
+                                   Invoked="EditItem_Invoked"
                                    CommandParameter="{Binding Id}"/>
                         </SwipeItems>
                     </SwipeView.RightItems>
-                    <StackLayout>
-                        <Label Grid.Column="1" Text="{Binding Title}" VerticalTextAlignment="Center" FontSize="18" Margin="10" />
+                    <VerticalStackLayout HorizontalOptions="Fill">
+                        <Grid>
+                            <Label Grid.Column="0" Text="{Binding Title}" VerticalTextAlignment="Center" FontSize="18" Margin="10" HorizontalOptions="Start" />
+                            <RadioButton Grid.Column="1" CheckedChanged="RadioButton_CheckedChanged" Value="{Binding IsComplete}" HorizontalOptions="End" />
+                        </Grid>
                         <BoxView Style="{StaticResource BoxSeperator}"/>
-                    </StackLayout>
+                    </VerticalStackLayout>
                 </SwipeView>
             </DataTemplate>
         </CollectionView.ItemTemplate>

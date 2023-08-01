@@ -12,6 +12,8 @@ namespace Todo.ViewModels
         private readonly ITodoItemRepository _todoItemRepository;
         private readonly ILogger _logger;
 
+        private int _todoListId;
+
         public ObservableCollection<TodoItem> TodoItems { get; set; } = new ObservableCollection<TodoItem>();
         public string ListTitle { get; set; }
 
@@ -24,6 +26,11 @@ namespace Todo.ViewModels
 
         public async Task LoadTodoItems(int todoListId)
         {
+            if(_todoListId == default)
+            {
+                _todoListId = todoListId;
+            }
+
             try
             {
                 var todoList = await _todoListRepository.GetTodoListByIdAsync(todoListId);
@@ -33,14 +40,27 @@ namespace Todo.ViewModels
                 var todoItems = await _todoItemRepository.GetTodoItemsByListIdAsync(todoListId);
 
                 TodoItems.Clear();
-                foreach (var todoItem in TodoItems)
+                foreach (var todoItem in todoItems)
                 {
                     TodoItems.Add(todoItem);
                 }
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error loading TodoItems");
+                _logger.LogError(ex, "Error loading Todo Items");
+            }
+        }
+
+        public async Task CreateTodoItem(int todoListId, string title)
+        {
+            try
+            {
+                await _todoItemRepository.CreateTodoItemAsync(todoListId, title);
+                await LoadTodoItems(_todoListId);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error creating Todo Item");
             }
         }
     }

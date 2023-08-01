@@ -30,5 +30,20 @@ namespace Todo.Services.Data
                                                     n.IsCompleted == false)
                                              .ToListAsync();
         }
+
+        public async Task CreateTodoItemAsync(int todoListId, string todoItemTitle)
+        {
+            var todoItem = new TodoItem
+            {
+                Title = todoItemTitle,
+                TodoListId = todoListId,
+                CreatedOn = DateTime.Now,
+                UpdatedOn = DateTime.Now,
+                IsDeleted = false,
+                IsCompleted = false
+            };
+
+            await todoDatabase.Catalog.InsertAsync(todoItem);
+        }
     }
 }

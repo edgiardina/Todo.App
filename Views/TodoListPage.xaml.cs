@@ -14,7 +14,6 @@ namespace Todo.Views
         {
             InitializeComponent();
             BindingContext = _todoListViewModel = todoListViewModel;
-
         }
 
         protected override async void OnAppearing()
@@ -34,7 +33,7 @@ namespace Todo.Views
             }
         }
 
-        private async void SwipeItem_Invoked(object sender, EventArgs e)
+        private async void DeleteItem_Invoked(object sender, EventArgs e)
         {
             var foundListItemId = int.TryParse(((SwipeItem)sender).CommandParameter.ToString(), out int swipedToDoListItemId);
 
@@ -52,6 +51,11 @@ namespace Todo.Views
             {
                 await Shell.Current.GoToAsync($"TodoItem?todoListId={selectedItem.Id}");
             }
+        }
+
+        private void EditItem_Invoked(object sender, EventArgs e)
+        {
+
         }
     }
 }

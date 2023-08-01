@@ -14,19 +14,33 @@ public partial class TodoItemPage : ContentPage
 		BindingContext = _todoItemViewModel = todoItemViewModel;
 	}
 
-    protected override void OnAppearing()
+    protected override async void OnAppearing()
     {
         base.OnAppearing();
-        _todoItemViewModel.LoadTodoItems(TodoListId);
+        await _todoItemViewModel.LoadTodoItems(TodoListId);
     }
 
-    private void AddButton_Clicked(object sender, EventArgs e)
+    private async void AddButton_Clicked(object sender, EventArgs e)
+    {
+        var response = await DisplayPromptAsync("Title", "Create a title for your Todo Item");
+
+        if (!string.IsNullOrWhiteSpace(response))
+        {
+            await _todoItemViewModel.CreateTodoItem(TodoListId, response.Trim());
+        }
+    }
+
+    private void EditItem_Invoked(object sender, EventArgs e)
+    {
+
+    }
+    private void DeleteItem_Invoked(object sender, EventArgs e)
     {
 
     }
 
-    private void SwipeItem_Invoked(object sender, EventArgs e)
+    private void RadioButton_CheckedChanged(object sender, CheckedChangedEventArgs e)
     {
-
+        
     }
 }

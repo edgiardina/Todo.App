@@ -4,6 +4,7 @@ using Serilog;
 using Todo.Services.Data;
 using Todo.ViewModels;
 using Todo.Views;
+using MauiIcons.Fluent;
 
 namespace Todo;
 
@@ -19,7 +20,8 @@ public static class MauiProgram
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 			})
-			.RegisterTodoModelsAndServices()
+            .UseFluentMauiIcons()
+            .RegisterTodoModelsAndServices()
             .ConfigureMauiHandlers(handlers =>
             {
                 //handlers to fix this issue which keeps crashing anytime we change an android collectionview

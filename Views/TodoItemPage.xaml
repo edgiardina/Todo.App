@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:fluent="clr-namespace:MauiIcons.Fluent;assembly=MauiIcons.Fluent"             
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"                     
              xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
              xmlns:android="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.AndroidSpecific;assembly=Microsoft.Maui.Controls"
              x:Class="Todo.Views.TodoItemPage"
              Title="{Binding ListTitle}">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Add Todo Item" x:Name="AddButton" Clicked="AddButton_Clicked" IconImageSource="{fluent:Icon Icon=Add28}" />
+        <ToolbarItem Text="Add Todo Item" x:Name="AddButton" Clicked="AddButton_Clicked" IconImageSource="add.png" />
     </ContentPage.ToolbarItems>
 
     <CollectionView x:Name="TodoLists" SelectionMode="None" ItemsSource="{Binding TodoItems}">
@@ -24,12 +23,12 @@
                     <SwipeView.RightItems>
                         <SwipeItems>
                             <SwipeItem Text="Delete"                                           
-                                   IconImageSource="{fluent:Icon Icon=Delete24, IconColor=White}"
+                                   IconImageSource="delete.png"
                                    BackgroundColor="{StaticResource DeleteBackgroundColor}"
                                    Invoked="DeleteItem_Invoked"
                                    CommandParameter="{Binding Id}"/>
                             <SwipeItem Text="Edit"                                           
-                                   IconImageSource="{fluent:Icon Icon=Edit32, IconColor=White}"
+                                   IconImageSource="edit.png"
                                    BackgroundColor="{StaticResource Yellow100Accent}"
                                    Invoked="EditItem_Invoked"
                                    CommandParameter="{Binding Id}"/>

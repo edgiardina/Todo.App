@@ -16,7 +16,7 @@ namespace Todo.ViewModels
         public ObservableCollection<TodoItem> TodoItems { get; set; } = new ObservableCollection<TodoItem>();
         public string ListTitle { get; set; }
 
-        public TodoItemViewModel(ITodoListRepository todoRepository, ITodoItemRepository todoItemRepository, ILogger<TodoListViewModel> logger)
+        public TodoItemViewModel(ITodoListRepository todoRepository, ITodoItemRepository todoItemRepository, ILogger<TodoItemViewModel> logger)
         {
             _todoListRepository = todoRepository;
             _todoItemRepository = todoItemRepository;

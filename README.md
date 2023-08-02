@@ -14,3 +14,4 @@ Paginate or otherwise progressively load long lists
 animations esp when a todo item is completed
 The two Repository classes are really more like Service layers; and the Sqlite extensions / TodoDatabase object is more like the repository layer. 
 logger isn't logging to debug window as I expected it to
+debug why the emptyview doesn't always show up in todo item view (suspect its a MAUI bug)

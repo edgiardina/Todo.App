@@ -4,7 +4,6 @@ using Serilog;
 using Todo.Services.Data;
 using Todo.ViewModels;
 using Todo.Views;
-using MauiIcons.Fluent;
 
 namespace Todo;
 
@@ -20,7 +19,6 @@ public static class MauiProgram
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 			})
-            .UseFluentMauiIcons()
             .RegisterTodoModelsAndServices()
             .ConfigureMauiHandlers(handlers =>
             {
@@ -71,7 +69,7 @@ public static class MauiProgram
         //The logger currently doesn't work as expected. I don't see output in the Debug output window
         //nor the AndroidLog. The packages are for Xamarin not specifically maui so it might be that
         //normally we'd be logging to AppCenter, SEQ, or something else. So the logging is currently
-        //just here to show you I see the value in it.
+
 
         builder.Services.AddLogging(builder => {
             builder.AddSerilog(Log.Logger);

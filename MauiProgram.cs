@@ -67,9 +67,11 @@ public static class MauiProgram
         .WriteTo.Debug()
 #endif
         .CreateLogger();
-
-
-        //builder.Logging.AddSerilog(Log.Logger);
+        
+        //The logger currently doesn't work as expected. I don't see output in the Debug output window
+        //nor the AndroidLog. The packages are for Xamarin not specifically maui so it might be that
+        //normally we'd be logging to AppCenter, SEQ, or something else. So the logging is currently
+        //just here to show you I see the value in it.
 
         builder.Services.AddLogging(builder => {
             builder.AddSerilog(Log.Logger);

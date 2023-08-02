@@ -20,6 +20,14 @@ public static class MauiProgram
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 			})
 			.RegisterTodoModelsAndServices()
+            .ConfigureMauiHandlers(handlers =>
+            {
+                //handlers to fix this issue which keeps crashing anytime we change an android collectionview
+                //https://github.com/dotnet/maui/issues/12219
+#if ANDROID
+                handlers.AddHandler<CollectionView, CustomCollectionViewHandler>();
+#endif
+            })
             .ConfigureLogging();
 
 		return builder.Build();

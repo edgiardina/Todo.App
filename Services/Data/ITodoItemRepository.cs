@@ -11,6 +11,7 @@ namespace Todo.Services.Data
     {
         Task CreateTodoItemAsync(int todoListId, string todoItemTitle);
         Task DeleteTodoItemAsync(int todoId);
+        Task EditTodoItemAsync(int toDoItemId, string title);
         Task<List<TodoItem>> GetTodoItemsByListIdAsync(int listId);
         Task MarkTodoItemCompleteAsync(int todoId);
     }

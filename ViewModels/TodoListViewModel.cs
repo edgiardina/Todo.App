@@ -63,5 +63,19 @@ namespace Todo.ViewModels
             }
         }
 
+        public async Task EditTodoListItem(int todoListId, string title)
+        {
+            try
+            {
+                await _todoListRepository.EditTodoListAsync(todoListId, title);
+                await this.LoadTodoLists();
+                _logger.LogDebug("User Edited TodoList item", todoListId);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error editing todolist");
+            }
+        }
+
     }
 }

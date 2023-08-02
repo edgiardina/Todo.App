@@ -30,7 +30,7 @@ namespace Todo.Services.Data
         public async Task<TodoList> GetTodoListByIdAsync(int id)
         {
             return await todoDatabase.Catalog.Table<TodoList>()
-                                 .FirstOrDefaultAsync(n => n.Id == id);                             
+                                 .FirstOrDefaultAsync(n => n.Id == id);
         }
 
         /// <summary>
@@ -61,6 +61,17 @@ namespace Todo.Services.Data
             var todoList = await todoDatabase.Catalog.Table<TodoList>().FirstAsync(n => n.Id == todoListId);
 
             todoList.IsDeleted = true;
-            await todoDatabase.Catalog.UpdateAsync(todoList);        }
+            todoList.UpdatedOn = DateTime.Now;
+            await todoDatabase.Catalog.UpdateAsync(todoList);
+        }
+
+        public async Task EditTodoListAsync(int todoListId, string title)
+        {
+            var todoList = await todoDatabase.Catalog.Table<TodoList>().FirstAsync(n => n.Id == todoListId);
+
+            todoList.Title = title;
+            todoList.UpdatedOn = DateTime.Now;
+            await todoDatabase.Catalog.UpdateAsync(todoList);
+        }
     }
 }

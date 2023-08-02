@@ -32,7 +32,17 @@ public partial class TodoItemPage : ContentPage
 
     private async void EditItem_Invoked(object sender, EventArgs e)
     {
+        var foundTodoItemId = int.TryParse(((SwipeItem)sender).CommandParameter.ToString(), out int swipedToDoItemId);
 
+        if (foundTodoItemId)
+        {
+            var todoItem = _todoItemViewModel.TodoItems.Single(n => n.Id == swipedToDoItemId);
+            var newTitle = await DisplayPromptAsync("Enter a new title", string.Empty, placeholder: todoItem.Title);
+            if (!string.IsNullOrWhiteSpace(newTitle))
+            {
+                await _todoItemViewModel.EditTodoItem(swipedToDoItemId, newTitle);
+            }
+        }
     }
     private async void DeleteItem_Invoked(object sender, EventArgs e)
     {

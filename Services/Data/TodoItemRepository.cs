@@ -51,6 +51,7 @@ namespace Todo.Services.Data
             var todoItem = await todoDatabase.Catalog.Table<TodoItem>().FirstAsync(n => n.Id == todoId);
 
             todoItem.IsCompleted = true;
+            todoItem.UpdatedOn = DateTime.Now;
             await todoDatabase.Catalog.UpdateAsync(todoItem);
         }
 
@@ -59,8 +60,17 @@ namespace Todo.Services.Data
             var todoItem = await todoDatabase.Catalog.Table<TodoItem>().FirstAsync(n => n.Id == todoId);
 
             todoItem.IsDeleted = true;
+            todoItem.UpdatedOn = DateTime.Now;
             await todoDatabase.Catalog.UpdateAsync(todoItem);
         }
 
+        public async Task EditTodoItemAsync(int todoId, string title)
+        {
+            var todoList = await todoDatabase.Catalog.Table<TodoItem>().FirstAsync(n => n.Id == todoId);
+
+            todoList.Title = title;
+            todoList.UpdatedOn = DateTime.Now;
+            await todoDatabase.Catalog.UpdateAsync(todoList);
+        }
     }
 }

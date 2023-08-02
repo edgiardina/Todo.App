@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using Todo.Models;
 using Todo.Services.Data;
 
@@ -91,6 +90,20 @@ namespace Todo.ViewModels
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error deleting Todo Item");
+            }
+        }
+
+        public async Task EditTodoItem(int toDoItemId, string title)
+        {
+            try
+            {
+                await _todoItemRepository.EditTodoItemAsync(toDoItemId, title);
+                await this.LoadTodoItems(_todoListId);
+                _logger.LogDebug("User Edited TodoList item", toDoItemId);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error editing todolist");
             }
         }
     }

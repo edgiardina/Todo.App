@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
-using Todo.Models;
+﻿using Todo.Models;
 using Todo.ViewModels;
 
 namespace Todo.Views
@@ -8,7 +7,6 @@ namespace Todo.Views
     public partial class TodoListPage : ContentPage
     {
         protected TodoListViewModel _todoListViewModel;
-
 
         public TodoListPage(TodoListViewModel todoListViewModel)
         {
@@ -49,13 +47,24 @@ namespace Todo.Views
 
             if (selectedItem != null)
             {
+                ((CollectionView)sender).SelectedItem = null;
                 await Shell.Current.GoToAsync($"TodoItem?todoListId={selectedItem.Id}");
             }
         }
 
-        private void EditItem_Invoked(object sender, EventArgs e)
+        private async void EditItem_Invoked(object sender, EventArgs e)
         {
+            var foundListItemId = int.TryParse(((SwipeItem)sender).CommandParameter.ToString(), out int swipedToDoListItemId);
 
+            if(foundListItemId)
+            {
+                var todoList = _todoListViewModel.TodoLists.Single(n => n.Id == swipedToDoListItemId);
+                var newTitle = await DisplayPromptAsync("Enter a new title", string.Empty, placeholder: todoList.Title);
+                if (string.IsNullOrWhiteSpace(newTitle))
+                {
+                    await _todoListViewModel.EditTodoListItem(swipedToDoListItemId, newTitle);
+                }
+            }
         }
     }
 }

@@ -7,14 +7,15 @@
              x:Class="Todo.Views.TodoItemPage"
              Title="{Binding ListTitle}">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Add Todo Item" x:Name="AddButton" Clicked="AddButton_Clicked"  IconImageSource="{fluent:Icon Icon=Add28}" />
+        <ToolbarItem Text="Add Todo Item" x:Name="AddButton" Clicked="AddButton_Clicked" IconImageSource="{fluent:Icon Icon=Add28}" />
     </ContentPage.ToolbarItems>
 
-    <CollectionView x:Name="TodoLists" x:FieldModifier="public" SelectionMode="None" ItemsSource="{Binding TodoItems}">
+    <CollectionView x:Name="TodoLists" SelectionMode="None" ItemsSource="{Binding TodoItems}">
         <CollectionView.EmptyView>
             <ContentView>
+                <!-- Sometimes on android this just flat out doesn't load. I think its related to height calculation -->
                 <Label Text="You have no Todo items for this list at the moment. Use the Add icon in the top right to create a Todo list."
-                       Padding="10" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
+                       HorizontalOptions="Center" VerticalOptions="Center" Padding="10" />
             </ContentView>
         </CollectionView.EmptyView>
         <CollectionView.ItemTemplate>

@@ -10,6 +10,8 @@ namespace Todo.Services.Data
     public interface ITodoItemRepository
     {
         Task CreateTodoItemAsync(int todoListId, string todoItemTitle);
+        Task DeleteTodoItemAsync(int todoId);
         Task<List<TodoItem>> GetTodoItemsByListIdAsync(int listId);
+        Task MarkTodoItemCompleteAsync(int todoId);
     }
 }

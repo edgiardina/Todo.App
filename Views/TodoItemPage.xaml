@@ -36,8 +36,14 @@
                     </SwipeView.RightItems>
                     <VerticalStackLayout HorizontalOptions="Fill">
                         <Grid>
-                            <Label Grid.Column="0" Text="{Binding Title}" VerticalTextAlignment="Center" FontSize="18" Margin="10" HorizontalOptions="Start" />
-                            <RadioButton Grid.Column="1" CheckedChanged="RadioButton_CheckedChanged" Value="{Binding IsComplete}" HorizontalOptions="End" />
+                            <Label Grid.Column="0" Text="{Binding Title}" VerticalTextAlignment="Center" FontSize="18" Margin="10" HorizontalOptions="Start" >
+                                <Label.Triggers>
+                                    <DataTrigger TargetType="Label" Binding="{Binding IsCompleted}" Value="True">
+                                        <Setter Property="Opacity" Value=".25" />
+                                    </DataTrigger>
+                                </Label.Triggers>
+                            </Label>
+                            <RadioButton Grid.Column="1" CheckedChanged="RadioButton_CheckedChanged" Value="{Binding Id}" HorizontalOptions="End" IsChecked="{Binding IsCompleted}" />
                         </Grid>
                         <BoxView Style="{StaticResource BoxSeperator}"/>
                     </VerticalStackLayout>

@@ -24,10 +24,10 @@ namespace Todo.Services.Data
         public async Task<List<TodoItem>> GetTodoItemsByListIdAsync(int listId)
         {
             return await todoDatabase.Catalog.Table<TodoItem>()
-                                             .Where(n => 
-                                                    n.TodoListId == listId && 
-                                                    n.IsDeleted == false && 
-                                                    n.IsCompleted == false)
+                                             .Where(n => n.TodoListId == listId &&
+                                                    n.IsDeleted == false)
+                                             //sort by Completed so incomplete items are biased towards the top
+                                             .OrderBy(n => n.IsCompleted)   
                                              .ToListAsync();
         }
 
@@ -45,5 +45,22 @@ namespace Todo.Services.Data
 
             await todoDatabase.Catalog.InsertAsync(todoItem);
         }
+
+        public async Task MarkTodoItemCompleteAsync(int todoId)
+        {
+            var todoItem = await todoDatabase.Catalog.Table<TodoItem>().FirstAsync(n => n.Id == todoId);
+
+            todoItem.IsCompleted = true;
+            await todoDatabase.Catalog.UpdateAsync(todoItem);
+        }
+
+        public async Task DeleteTodoItemAsync(int todoId)
+        {
+            var todoItem = await todoDatabase.Catalog.Table<TodoItem>().FirstAsync(n => n.Id == todoId);
+
+            todoItem.IsDeleted = true;
+            await todoDatabase.Catalog.UpdateAsync(todoItem);
+        }
+
     }
 }

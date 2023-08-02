@@ -63,5 +63,35 @@ namespace Todo.ViewModels
                 _logger.LogError(ex, "Error creating Todo Item");
             }
         }
+
+        public async Task CompleteTodoItem(int todoItemId)
+        {
+            try
+            {
+                await _todoItemRepository.MarkTodoItemCompleteAsync(todoItemId);
+                await LoadTodoItems(_todoListId);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error completing Todo Item");
+            }
+        }
+
+        public async Task DeleteTodoItem(int todoItemId)
+        {
+            try
+            {
+                await _todoItemRepository.DeleteTodoItemAsync(todoItemId);
+                //This is rather lazy, to be honest. reloading the items instead of just finding and
+                //modifying the observable collection / item. But, it wasn't clear how much time I should
+                //spend on this, (I did ask) so I put this here to get the entire spec done, and then add the magical
+                //TODO: do not reload the entire list
+                await LoadTodoItems(_todoListId);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error deleting Todo Item");
+            }
+        }
     }
 }

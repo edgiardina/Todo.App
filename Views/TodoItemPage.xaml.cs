@@ -30,17 +30,27 @@ public partial class TodoItemPage : ContentPage
         }
     }
 
-    private void EditItem_Invoked(object sender, EventArgs e)
+    private async void EditItem_Invoked(object sender, EventArgs e)
     {
 
     }
-    private void DeleteItem_Invoked(object sender, EventArgs e)
+    private async void DeleteItem_Invoked(object sender, EventArgs e)
     {
+        var foundTodoItemId = int.TryParse(((SwipeItem)sender).CommandParameter.ToString(), out int swipedToDoItemId);
 
+        if (foundTodoItemId)
+        {
+            await _todoItemViewModel.DeleteTodoItem(swipedToDoItemId);
+        }
     }
 
-    private void RadioButton_CheckedChanged(object sender, CheckedChangedEventArgs e)
+    private async void RadioButton_CheckedChanged(object sender, CheckedChangedEventArgs e)
     {
-        
+        var foundTodoItemId = int.TryParse(((RadioButton)sender).Value.ToString(), out int swipedToDoItemId);
+
+        if (foundTodoItemId)
+        {
+            await _todoItemViewModel.CompleteTodoItem(swipedToDoItemId);
+        }
     }
 }

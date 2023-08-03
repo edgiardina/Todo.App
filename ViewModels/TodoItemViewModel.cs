@@ -63,7 +63,7 @@ namespace Todo.ViewModels
             }
         }
 
-        public async Task CompleteTodoItem(int todoItemId)
+        public async Task MarkCompleteTodoItem(int todoItemId)
         {
             try
             {
@@ -104,6 +104,19 @@ namespace Todo.ViewModels
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error editing todolist");
+            }
+        }
+
+        public async Task MarkIncompleteTodoItem(int todoItemId)
+        {
+            try
+            {
+                await _todoItemRepository.MarkTodoItemIncompleteAsync(todoItemId);
+                await LoadTodoItems(_todoListId);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error marking incomplete Todo Item");
             }
         }
     }

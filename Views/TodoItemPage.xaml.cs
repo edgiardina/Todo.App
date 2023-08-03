@@ -54,13 +54,20 @@ public partial class TodoItemPage : ContentPage
         }
     }
 
-    private async void RadioButton_CheckedChanged(object sender, CheckedChangedEventArgs e)
+    private async void Checkbox_CheckedChanged(object sender, CheckedChangedEventArgs e)
     {
-        var foundTodoItemId = int.TryParse(((RadioButton)sender).Value.ToString(), out int swipedToDoItemId);
+        var foundTodoItemId = int.TryParse(((CheckBox)sender).ClassId.ToString(), out int swipedToDoItemId);
 
         if (foundTodoItemId)
         {
-            await _todoItemViewModel.CompleteTodoItem(swipedToDoItemId);
+            if (e.Value)
+            {
+                await _todoItemViewModel.MarkCompleteTodoItem(swipedToDoItemId);
+            }
+            else
+            {
+                await _todoItemViewModel.MarkIncompleteTodoItem(swipedToDoItemId);
+            }
         }
     }
 }

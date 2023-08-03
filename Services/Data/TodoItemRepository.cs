@@ -72,5 +72,14 @@ namespace Todo.Services.Data
             todoList.UpdatedOn = DateTime.Now;
             await todoDatabase.Catalog.UpdateAsync(todoList);
         }
+
+        public async Task MarkTodoItemIncompleteAsync(int todoId)
+        {
+            var todoItem = await todoDatabase.Catalog.Table<TodoItem>().FirstAsync(n => n.Id == todoId);
+
+            todoItem.IsCompleted = false;
+            todoItem.UpdatedOn = DateTime.Now;
+            await todoDatabase.Catalog.UpdateAsync(todoItem);
+        }
     }
 }

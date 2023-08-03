@@ -43,7 +43,18 @@
                                     </DataTrigger>
                                 </Label.Triggers>
                             </Label>
-                            <RadioButton Grid.Column="1" CheckedChanged="RadioButton_CheckedChanged" Value="{Binding Id}" HorizontalOptions="End" IsChecked="{Binding IsCompleted}" />
+                            <!-- Override classid to hold todoitemID -->
+                            <CheckBox Grid.Column="1" CheckedChanged="Checkbox_CheckedChanged" ClassId="{Binding Id}" HorizontalOptions="End" IsChecked="{Binding IsCompleted}" >
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="CommonStates">     
+                                        <VisualState x:Name="IsChecked">
+                                            <VisualState.Setters>
+                                                <Setter Property="Opacity" Value=".25" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                            </CheckBox>
                         </Grid>
                         <BoxView Style="{StaticResource BoxSeperator}"/>
                     </VerticalStackLayout>

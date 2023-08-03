@@ -43,5 +43,23 @@ namespace Todo.UnitTests
             Assert.That(mockListTitle, Is.EqualTo(viewModel.ListTitle));
             Assert.That(viewModel.TodoItems, Is.Not.Empty);
         }
+
+        [Test]
+        public async Task TodoItemsAddCallsRepositoryMethod()
+        {
+            // Arrange
+            var mockToDoListId = 1;
+            var mockItemTitle = "OtherTitle";
+            var todoItemRepo = new Mock<ITodoItemRepository>();
+            var todoListRepo = new Mock<ITodoListRepository>();
+            var loggerMock = new Mock<ILogger<TodoItemViewModel>>();
+            var viewModel = new TodoItemViewModel(todoListRepo.Object, todoItemRepo.Object, loggerMock.Object);          
+
+            // Act
+            await viewModel.CreateTodoItem(mockToDoListId, mockItemTitle);
+
+            // Assert
+            todoItemRepo.Verify(n => n.CreateTodoItemAsync(mockToDoListId, mockItemTitle), Times.Once);
+        }
     }
 }

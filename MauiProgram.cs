@@ -38,12 +38,12 @@ public static class MauiProgram
         var s = builder.Services;
 
         //Add Pages/Views
-        s.AddSingleton<TodoListPage>();
-        s.AddSingleton<TodoItemPage>();
+        s.AddScoped<TodoListPage>();
+        s.AddScoped<TodoItemPage>();
 
         //Add ViewModels
-        s.AddSingleton<TodoListViewModel>();
-        s.AddSingleton<TodoItemViewModel>();
+        s.AddScoped<TodoListViewModel>();
+        s.AddScoped<TodoItemViewModel>();
 
         //Add Services
         s.AddSingleton<TodoDatabase>();

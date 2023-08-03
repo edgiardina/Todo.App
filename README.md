@@ -8,11 +8,11 @@ Upon loading, the app will present a simple, two-page interface powered by SQLit
 
 Things I probably would have done with more time:
 
-debug why the emptyview doesn't always show up in todo item view (suspect its a MAUI bug)
-Manage strings for localization using a Resx file
-not reload lists when a list item has changed
-Paginate or otherwise progressively load long lists
-animations esp when a todo item is completed
-The two Repository classes are really more like Service layers; and the Sqlite extensions / TodoDatabase object is more like the repository layer. 
-logger isn't logging to debug window as I expected it to
-Probably write more tests
+- debug why the emptyview doesn't always show up in todo item view (suspect its a MAUI bug)
+- Manage strings for localization using a Resx file
+- not reload lists when a list item has changed
+- Paginate or otherwise progressively load long lists
+- animations esp when a todo item is completed
+- The two Repository classes are really more like Service layers; and the Sqlite extensions / TodoDatabase object is more like the repository layer. 
+- logger isn't logging to debug window as I expected it to
+- Probably write more tests

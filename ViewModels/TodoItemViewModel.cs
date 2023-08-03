@@ -55,7 +55,7 @@ namespace Todo.ViewModels
             try
             {
                 await _todoItemRepository.CreateTodoItemAsync(todoListId, title);
-                await LoadTodoItems(_todoListId);
+                await LoadTodoItems(todoListId);
             }
             catch (Exception ex)
             {

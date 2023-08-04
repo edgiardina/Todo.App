@@ -46,18 +46,20 @@
                             <!-- Override classid to hold todoitemID -->
                             <CheckBox Grid.Column="1" CheckedChanged="Checkbox_CheckedChanged" ClassId="{Binding Id}" HorizontalOptions="End" IsChecked="{Binding IsCompleted}" >
                                 <VisualStateManager.VisualStateGroups>
-                                    <VisualStateGroup x:Name="CommonStates">
-                                        <VisualState x:Name="Normal">
-                                            <VisualState.Setters>
-                                                <Setter Property="Opacity" Value="1" />
-                                            </VisualState.Setters>
-                                        </VisualState>
-                                        <VisualState x:Name="IsChecked">
-                                            <VisualState.Setters>
-                                                <Setter Property="Opacity" Value=".25" />
-                                            </VisualState.Setters>
-                                        </VisualState>
-                                    </VisualStateGroup>
+                                    <VisualStateGroupList>
+                                        <VisualStateGroup x:Name="CommonStates">
+                                            <VisualState x:Name="Normal">
+                                                <VisualState.Setters>
+                                                    <Setter Property="Opacity" Value="1" />
+                                                </VisualState.Setters>
+                                            </VisualState>
+                                            <VisualState x:Name="IsChecked">
+                                                <VisualState.Setters>
+                                                    <Setter Property="Opacity" Value=".25" />
+                                                </VisualState.Setters>
+                                            </VisualState>
+                                        </VisualStateGroup>
+                                    </VisualStateGroupList>
                                 </VisualStateManager.VisualStateGroups>
                             </CheckBox>
                         </Grid>
